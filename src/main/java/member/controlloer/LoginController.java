@@ -51,20 +51,24 @@ public class LoginController extends HttpServlet {
 		MemberService service = new MemberService();
 		Member mOne = service.selectCheckLogin(member);
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("memberId", mOne.getMemberId());
-		session.setAttribute("memberName", mOne.getMemberName());
 		
 		if(mOne != null) {
+			
+			//로그인이 성공한 후 jsp에서 키값으로 가져다 쓰인다. 
+			HttpSession session = request.getSession();
+			session.setAttribute("memberId", mOne.getMemberId());
+			session.setAttribute("memberName", mOne.getMemberName());
+			
+			
 			//로그인 성공
 			request.setAttribute("msg", "로그인 성공");
 			request.setAttribute("url", "/index.jsp");
-			RequestDispatcher view = request.getRequestDispatcher("/member/serviceSuccess.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/serviceSuccess.jsp");
 			view.forward(request, response);   //누락 주의
 		} else {
 			//로그인 실패
 			request.setAttribute("msg", "로그인 실패");
-			RequestDispatcher view = request.getRequestDispatcher("/member/serviceFail.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/serviceFail.jsp");
 			view.forward(request, response);   //누락 주의
 		}
 	}

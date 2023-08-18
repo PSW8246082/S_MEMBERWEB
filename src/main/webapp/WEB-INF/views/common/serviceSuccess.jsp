@@ -12,10 +12,12 @@
  	<script>
  	const result = "${msg}";
  	const url = "${url}";
+ 	
  	alert(result);
+ 	location.href = url;  
 //방법2)  	alert("${requestScope.msg}");
 // 	location.href = "/index.jsp";  //무한로그인...?
-	location.href = url;  
+	//location.href = url;  
  	</script>
 </body>
 </html>
